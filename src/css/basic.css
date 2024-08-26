@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'pretendard';
+  src: url('../../assets/fonts/Pretendard-Regular.woff2');
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'pretendard';
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
