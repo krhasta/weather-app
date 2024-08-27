@@ -1,5 +1,4 @@
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import '../../css/basic.css';
 import './ShowWeather.css';
 
 export default function ShowWeather() {

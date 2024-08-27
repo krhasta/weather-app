@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'pretendard';
+  src: url('../../assets/fonts/Pretendard-Regular.woff2');
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'pretendard';
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding-top: 1px;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(0deg, #62d0f7 0%, #3261e9 100%);
+}
+
 .title {
   text-align: center;
   margin-top: 50px;
