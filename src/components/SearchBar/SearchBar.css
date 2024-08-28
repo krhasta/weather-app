@@ -44,6 +44,8 @@
 }
 
 .preview-container {
+  padding: 0;
+  margin: 0;
   width: 500px;
   font-size: 15px;
   padding-top: 25px;
@@ -56,6 +58,7 @@
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   z-index: 0;
+  list-style-type: none;
 }
 
 .preview-list {
@@ -64,7 +67,6 @@
   font-size: 13px;
   margin-bottom: 0.3125rem;
   cursor: pointer;
-  /* transition: font-size 0.1s; */
 }
 
 .preview-list:hover {

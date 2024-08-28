@@ -5,18 +5,14 @@ import SearchPreview from './SearchPreview';
 import './SearchBar.css';
 
 export default function SearchBar(props) {
-  const [preview, setPreview] = useState(props.location);
+  const [preview, setPreview] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-
   const inputRef = useRef(null);
 
-  function clicked(event) {
-    if (document.activeElement === inputRef.current) {
-      setIsFocused(true);
-    }
+  function clicked() {
+    const isInputActive = document.activeElement === inputRef.current;
+    setIsFocused(isInputActive ? true : false);
   }
-
-  console.log(inputRef);
 
   useEffect(() => {
     return document.addEventListener('click', clicked);
@@ -35,8 +31,10 @@ export default function SearchBar(props) {
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              getWeatherData(props.location);
+              props.setWeatherStatus(getWeatherData(props.location));
               e.target.value = '';
+              setIsFocused(false);
+              // props.setWeatherStatus(props.locaation);
             }
           }}
           ref={inputRef}
@@ -49,9 +47,7 @@ export default function SearchBar(props) {
           }}
         ></i>
       </div>
-      {isFocused && location && <SearchPreview preview={preview} />}
-
-      {/* <SearchPreview preview={preview} /> */}
+      {isFocused && preview && <SearchPreview location={preview} getWeatherData={getWeatherData} />}
     </div>
   );
 }

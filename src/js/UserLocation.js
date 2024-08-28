@@ -54,7 +54,7 @@ async function getLocationData(address) {
   return locationData; // 응답 본문 문자열 반환
 }
 
-export default async function fetchInitLocation(setLocation, setCountry) {
+export default async function fetchUserLocation(setLocation, setCountry) {
   // try {
   const initLatLong = await getLatLong();
   const locationData = await getLocationData(initLatLong);
@@ -62,5 +62,5 @@ export default async function fetchInitLocation(setLocation, setCountry) {
 
   console.log(locationRes[3].long_name);
   setLocation(locationRes[3].long_name); // city name
-  setCountry(locationRes[4].short_name); // country name
+  // setCountry(locationRes[4].short_name); // country name
 }

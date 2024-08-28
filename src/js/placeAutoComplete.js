@@ -26,11 +26,11 @@ async function getPreview(location) {
   return preview;
 }
 
-export default async function fetchPreview(location, setPreview) {
+export default async function fetchPreview(location, setLocation) {
   const previewData = await getPreview(location);
   const previewList = [];
   previewData.suggestions.map((placeList, i) => {
     previewList.push(placeList.placePrediction.text.text);
   });
-  setPreview(previewList);
+  setLocation(previewList);
 }
