@@ -1,6 +1,6 @@
 import './SearchBar.css';
 
-export default function SearchPreview({ preview }) {
+export default function SearchPreview({ preview = [] }) {
   return (
     <>
       {/* <div className="pad-dummy"></div> */}

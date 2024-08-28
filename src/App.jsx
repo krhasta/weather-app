@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SearchBar from './components/SearchBar/SearchBar';
 import ShowWeather from './components/ShowWeather/ShowWeather';
 import fetchInitLocation from './js/initialUserLocation';
@@ -9,9 +9,9 @@ function App() {
   const [country, setCountry] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
 
-  useEffect(() => {
-    fetchInitLocation(setLocation, setCountry);
-  }, []);
+  // useEffect(() => {
+  //   fetchInitLocation(setLocation, setCountry);
+  // }, []);
 
   return (
     <>
@@ -26,7 +26,6 @@ function App() {
         setWeatherData={setWeatherData}
       />
       <ShowWeather></ShowWeather>
-      <button onClick={() => console.log(location)}>현재 위치 확인</button>
     </>
   );
 }

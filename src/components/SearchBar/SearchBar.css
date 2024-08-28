@@ -46,7 +46,7 @@
 .preview-container {
   width: 500px;
   font-size: 15px;
-  padding-top: 20px;
+  padding-top: 25px;
   background-color: white;
   flex-direction: column;
   position: absolute;
@@ -64,7 +64,7 @@
   font-size: 13px;
   margin-bottom: 0.3125rem;
   cursor: pointer;
-  transition: font-size 0.1s;
+  /* transition: font-size 0.1s; */
 }
 
 .preview-list:hover {
