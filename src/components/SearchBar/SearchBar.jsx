@@ -4,7 +4,7 @@ import fetchPreview from '../../js/placeAutoComplete';
 import SearchPreview from './SearchPreview';
 import './SearchBar.css';
 
-export default function SearchBar(props) {
+export default function SearchBar({ location, setLocation, setWeatherData }) {
   const [preview, setPreview] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
@@ -26,23 +26,36 @@ export default function SearchBar(props) {
           className="search"
           placeholder="날씨가 어떨까"
           onChange={(e) => {
-            props.setLocation(e.target.value);
-            fetchPreview(props.location, setPreview);
+            setLocation(e.target.value);
+            fetchPreview(location, setPreview);
           }}
-          onKeyDown={(e) => {
+          onKeyDown={async (e) => {
             if (e.key === 'Enter') {
-              props.setWeatherStatus(getWeatherData(props.location));
+              const aaa = await getWeatherData(location);
+              setWeatherData(aaa);
               e.target.value = '';
               setIsFocused(false);
-              // props.setWeatherStatus(props.locaation);
             }
           }}
+          // onKeyDown={async (e) => {
+          //   if (e.key === 'Enter') {
+          //     try {
+          //       const data = await getWeatherData(location);
+          //       setWeatherData(data);
+          //       e.target.value = '';
+          //       setIsFocused(false);
+          //     } catch (error) {
+          //       console.error('Error fetching weather data:', error);
+          //       setWeatherData(null);
+          //     }
+          //   }
+          // }}
           ref={inputRef}
         ></input>
         <i
           className="fa-solid fa-magnifying-glass inner-input-right"
           onClick={(e) => {
-            getWeatherData(props.location);
+            getWeatherData(location);
             e.target.value = '';
           }}
         ></i>

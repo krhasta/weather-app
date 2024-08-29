@@ -16,14 +16,23 @@ async function getPreview(location) {
     redirect: 'follow',
   };
 
-  const preview = await fetch('https://places.googleapis.com/v1/places:autocomplete', requestOptions)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
+  try {
+    const response = await fetch('https://places.googleapis.com/v1/places:autocomplete', requestOptions);
+    const previewData = await response.json();
+    return previewData;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 
-  return preview;
+  // const preview = await fetch('https://places.googleapis.com/v1/places:autocomplete', requestOptions)
+  //   .then((response) => response.json())
+  //   .catch((error) => {
+  //     console.error(error);
+  //     throw error;
+  //   });
+
+  // return preview;
 }
 
 export default async function fetchPreview(location, setLocation) {

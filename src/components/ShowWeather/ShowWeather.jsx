@@ -1,9 +1,9 @@
 import './ShowWeather.css';
 
-export default function ShowWeather() {
+export default function ShowWeather(props) {
   return (
     <div className="flex">
-      <div className="box-weather"></div>
+      <div className="box-weather">{props.weatherData}</div>
     </div>
   );
 }

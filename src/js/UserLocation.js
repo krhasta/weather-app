@@ -36,31 +36,51 @@ async function getLatLong() {
 }
 
 async function getLocationData(address) {
-  const locationData = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyClwM-wCFxR51cLqOnXNgqTrWUMUptO_vo`,
-    {
-      method: 'GET',
-      headers: {
-        'Accept-Language': 'en',
-      },
-      redirect: 'follow',
-    }
-  )
-    .then((response) => response.json())
-    .catch((err) => {
-      console.error(err);
-      throw error;
-    });
-  return locationData; // 응답 본문 문자열 반환
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyClwM-wCFxR51cLqOnXNgqTrWUMUptO_vo`,
+      {
+        method: 'GET',
+        headers: {
+          'Accept-Language': 'en',
+        },
+        redirect: 'follow',
+      }
+    );
+    const locationData = await response.json();
+    return locationData;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
-export default async function fetchUserLocation(setLocation, setCountry) {
+// async function getLocationData(address) {
+//   const locationData = await fetch(
+//     `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyClwM-wCFxR51cLqOnXNgqTrWUMUptO_vo`,
+//     {
+//       method: 'GET',
+//       headers: {
+//         'Accept-Language': 'en',
+//       },
+//       redirect: 'follow',
+//     }
+//   )
+//     .then((response) => response.json())
+//     .catch((error) => {
+//       console.error(error);
+//       throw error;
+//     });
+//   return locationData; // 응답 본문 문자열 반환
+// }
+
+export default async function fetchUserLocation(setLocation) {
   // try {
   const initLatLong = await getLatLong();
   const locationData = await getLocationData(initLatLong);
   const locationRes = locationData.results[0].address_components;
 
-  console.log(locationRes[3].long_name);
+  // console.log(locationRes[3].long_name);
   setLocation(locationRes[3].long_name); // city name
   // setCountry(locationRes[4].short_name); // country name
 }

@@ -7,10 +7,17 @@ export default async function getWeatherData(region) {
     redirect: 'follow',
   };
 
-  fetch(`${url}?key=${key}&q=${region}&lang=ko`, requestOptions)
-    // .then((response) => response.text())
-    // .then((result) => console.log(result))
-    // .catch((error) => console.error(error));
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
+  // await fetch(`${url}?key=${key}&q=${region}&lang=ko`, requestOptions)
+  //   .then((response) => response.json())
+  //   .catch((error) => {
+  //     console.log(error);
+  //     throw error;
+  //   });
+  try {
+    const response = await fetch(`${url}?key=${key}&q=${region}&lang=ko`, requestOptions);
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
