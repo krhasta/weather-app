@@ -9,13 +9,35 @@ export default function SearchBar({ location, setLocation, setWeatherData }) {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
 
-  function clicked() {
+  function handleChange(event) {
+    try {
+      setLocation(event.target.value);
+      fetchPreview(location, setPreview);
+    } catch (error) {
+      console.log('function handleChange error!', error);
+    }
+  }
+
+  async function handleKeyDown(event) {
+    try {
+      if (event.key === 'Enter') {
+        const data = await getWeatherData(event.target.value);
+        setWeatherData(data);
+        setIsFocused(false);
+        event.target.value = '';
+      }
+    } catch (error) {
+      console.log('function handleKeyDown error!', error);
+    }
+  }
+
+  function isClicked() {
     const isInputActive = document.activeElement === inputRef.current;
     setIsFocused(isInputActive ? true : false);
   }
 
   useEffect(() => {
-    return document.addEventListener('click', clicked);
+    return document.addEventListener('click', isClicked);
   }, []);
 
   return (
@@ -25,31 +47,8 @@ export default function SearchBar({ location, setLocation, setWeatherData }) {
         <input
           className="search"
           placeholder="날씨가 어떨까"
-          onChange={(e) => {
-            setLocation(e.target.value);
-            fetchPreview(location, setPreview);
-          }}
-          onKeyDown={async (e) => {
-            if (e.key === 'Enter') {
-              const aaa = await getWeatherData(location);
-              setWeatherData(aaa);
-              e.target.value = '';
-              setIsFocused(false);
-            }
-          }}
-          // onKeyDown={async (e) => {
-          //   if (e.key === 'Enter') {
-          //     try {
-          //       const data = await getWeatherData(location);
-          //       setWeatherData(data);
-          //       e.target.value = '';
-          //       setIsFocused(false);
-          //     } catch (error) {
-          //       console.error('Error fetching weather data:', error);
-          //       setWeatherData(null);
-          //     }
-          //   }
-          // }}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
           ref={inputRef}
         ></input>
         <i

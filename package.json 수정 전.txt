@@ -1,0 +1,10 @@
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+
+
+
+  dependencies의 "concurrently": "^7.0.0"는 없었음
