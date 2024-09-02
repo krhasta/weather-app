@@ -23,8 +23,9 @@ app.get('/', function (req, res) {
 
 app.get('/getUserIP', (req, res) => {
   let userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  if (userIP === '::1') {
-    userIP = '125.135.79.166';
+  if (userIP === '::1' || userIP === '::ffff:127.0.0.1') {
+    userIP = '203.237.81.62';
+    // userIP = '125.135.79.166';
     console.log(userIP);
   }
   res.send(userIP);

@@ -24,22 +24,13 @@ async function getPreview(location) {
     console.log(error);
     throw error;
   }
-
-  // const preview = await fetch('https://places.googleapis.com/v1/places:autocomplete', requestOptions)
-  //   .then((response) => response.json())
-  //   .catch((error) => {
-  //     console.error(error);
-  //     throw error;
-  //   });
-
-  // return preview;
 }
 
-export default async function fetchPreview(location, setLocation) {
+export default async function fetchPreview(location, setPreview) {
   const previewData = await getPreview(location);
   const previewList = [];
   previewData.suggestions.map((placeList, i) => {
     previewList.push(placeList.placePrediction.text.text);
   });
-  setLocation(previewList);
+  setPreview(previewList);
 }

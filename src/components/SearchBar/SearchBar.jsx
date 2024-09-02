@@ -12,7 +12,7 @@ export default function SearchBar({ location, setLocation, setWeatherData }) {
   function handleChange(event) {
     try {
       setLocation(event.target.value);
-      fetchPreview(location, setPreview);
+      fetchPreview(event.target.value, setPreview);
     } catch (error) {
       console.log('function handleChange error!', error);
     }

@@ -1,8 +1,13 @@
-export default async function getIP(setIP) {
+import getWeatherData from './weather';
+
+export default async function initialWeather() {
   const response = await fetch('/getUserIP', {
     method: 'GET',
     redirect: 'follow',
   });
-  const aaa = await response.text();
-  setIP(aaa);
+  const IP = await response.text();
+  const data = await getWeatherData(IP);
+  console.log('Data fetched: \n', data);
+
+  return data;
 }
